@@ -7,6 +7,8 @@
 # Require the package and its dependencies
 composer require marshmallow/translatable
 
+php artisan vendor:publish --provider Marshmallow\\Translatable\\ServiceProvider
+
 # Migrate the translations and translatable tables.
 php artisan migrate
 
@@ -21,6 +23,23 @@ php artisan marshmallow:resource Translation Translatable
 php artisan translatable:sync-file-to-database
 php artisan translatable:sync-missing
 ```
+
+::: warning
+Because of group by's in queries you probably need to change your database strict to `false`. If you get database errors during the installation, this is probebly the issue.
+::: details config/database.php
+```php
+/**
+ * Please change strict mode to false in config/database.php
+ */
+'connections' => [
+	// ...
+	'mysql' => [
+		// ...
+	    'strict' => false,
+	],
+],
+```
+:::
 
 ## Preparing your models
 The only thing you need to do to prepare your model to use translations is adding the `Translatable` trait to all the models you want to be translated.
@@ -61,20 +80,6 @@ $page->setTranslation('nl', 'name', 'Artikelen');
 $page->setTranslation('nl', [
 	'name' => 'Artikelen',
 ]);
-```
-
-## Translate separate value
-If you wish to also handle the translations in your application, you can add our translation tool. All strings that are in one of your language files or in a blade file using the `__('Text string')` function will be available for translation in this tool.
-
-```php
-use Marshmallow\NovaTranslation\NovaTranslation;
-
-public function tools()
-{
-    return [
-        new NovaTranslation,
-    ];
-}
 ```
 
 ## Options
