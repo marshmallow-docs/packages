@@ -15,9 +15,11 @@ php artisan translatable:install
 
 # Create the language resource
 php artisan marshmallow:resource Language Translatable
+php artisan marshmallow:resource Translation Translatable
 
 # Seed your translations table
-php artisan translation:sync-translations
+php artisan translatable:sync-file-to-database
+php artisan translatable:sync-missing
 ```
 
 ## Preparing your models
@@ -61,9 +63,24 @@ $page->setTranslation('nl', [
 ]);
 ```
 
+## Translate separate value
+If you wish to also handle the translations in your application, you can add our translation tool. All strings that are in one of your language files or in a blade file using the `__('Text string')` function will be available for translation in this tool.
+
+```php
+use Marshmallow\NovaTranslation\NovaTranslation;
+
+public function tools()
+{
+    return [
+        new NovaTranslation,
+    ];
+}
+```
+
 ## Options
 ### Excluding from translations
 By default we set all columns to translatable except for the columns that are [marked as producted](#marked-as-protected) by us. You have two options to change this behaviour. You can set the translatable columns manualy or you can keep the default behaviour and exclude more columns.
+::: details View examples
 ```php
 # In this example, we have a resource with the columns:
 # id, name, slug, image, created_at
@@ -93,6 +110,7 @@ public function ignoreFromTranslations(): array
 	];
 }
 ```
+:::
 
 
 ### Marked as protected

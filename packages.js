@@ -10,6 +10,7 @@ module.exports = [
         collapsable: false,
         children: prefix('nova', [
             'translatable',
+            'live-update',
         ]),
     }
 ]

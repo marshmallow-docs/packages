@@ -3,4 +3,8 @@ At Marshmallow we build al lot of packages. This is done for our customers to pr
 
 If you are missing functionalities in one of our packages of you need a completely new package, dont hasitate to contact us. We would love to brainstorm with you and see whats possible.
 
+| Name        | Issues           | Version  |
+| :------------- |:-------------| :-----|
+| [marshmallow/translatable](/packages/nova/translatable.html) | <img src="https://img.shields.io/github/issues/marshmallow-packages/translatable"/> | <img src="https://img.shields.io/packagist/v/marshmallow/translatable"> |
+
 <EditOnGithub repo_name="packages" edit_url="introduction.md"/>
