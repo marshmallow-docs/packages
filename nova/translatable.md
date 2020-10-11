@@ -54,14 +54,14 @@ class Page extends Model
 ```
 
 ## Preparing your Nova resources
-The only thing you need to do to prepare your nova resources to use translations is adding the `Translatable` trait to all the models you want to be translated and change the `fields` method to `translatableFields`. The trait you are adding implements the `fields` method for you. When you are not translating a resource, it will just return the fields from `translatableFields` to Nova so you can edit all your fields. If you are translating, it will delete all the fields that you didn't include in you translatable columns. Please check the `options` chapter of this documentation to checkout how you can [exclude columns/fields](#excluding-from-translations) from translations.
+The only thing you need to do to prepare your nova resources to use translations is adding the `TranslatableFields` trait to all the models you want to be translated and change the `fields` method to `translatableFields`. The trait you are adding implements the `fields` method for you. When you are not translating a resource, it will just return the fields from `translatableFields` to Nova so you can edit all your fields. If you are translating, it will delete all the fields that you didn't include in you translatable columns. Please check the `options` chapter of this documentation to checkout how you can [exclude columns/fields](#excluding-from-translations) from translations.
 
 ```php
-use Marshmallow\Translatable\Traits\Translatable;
+use Marshmallow\Translatable\Traits\TranslatableFields;
 
 class Page extends Resource
 {
-	use Translatable;
+	use TranslatableFields;
 
 	//...
 
