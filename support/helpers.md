@@ -1,0 +1,116 @@
+# Helpers
+We have build a package with some helpers that are usefull in almost every project. We use this package in all our projects. For ourself and for our customers. If you miss anything, create an issue and will will add it as soon as possible.
+
+[[toc]]
+
+## Installation
+```bash
+composer require marshmallow/helpers
+```
+
+## Str
+The Str helper extends the helper from Laravel. So you have all the methods available in the Laravel helper available as well. Check the [Laravel documentation](https://laravel.com/docs/helpers) for all the available methods.
+
+### Str::cleanPhoneNumber()
+```php
+Str::cleanPhoneNumber()
+```
+
+### Str::phonenumberWithCountryCode()
+Return a cleaned phonenumber with the country code. You can choose to return the phonenumber with a `+` or `00` at the start of the phonenumber.
+```php
+Str::phonenumberWithCountryCode('0628998954')
+// response: +31628998954
+
+Str::phonenumberWithCountryCode('0031628998954', $country_code = '31', $use_plus_instead_of_zeros = false)
+// response: 0031628998954
+```
+
+### Str::numbersOnly()
+```php
+Str::numbersOnly()
+```
+
+### Str::numbersAndLettersOnly()
+```php
+Str::numbersAndLettersOnly()
+```
+
+### Str::readmore()
+```php
+Str::readmore($string, $lenght_first_part, $return_this_part = null)
+```
+
+### Str::paragraphsAsArray()
+```php
+Str::paragraphsAsArray($string)
+```
+
+### Str::getFirstParagraph()
+```php
+Str::getFirstParagraph($string, $number_of_paragraphs = 1, $return_array = false)
+```
+
+### Str::getAllButFirstParagraph()
+```php
+Str::getAllButFirstParagraph($string, $number_of_paragraphs_to_skip = 1, $return_array = false)
+```
+
+## URL
+
+### Str::isInternal()
+```php
+Str::isInternal($url)
+```
+### Str::buildFromArray()
+```php
+Str::buildFromArray($array)
+```
+### Str::isNova()
+```php
+Str::isNova($request)
+```
+### Str::isNotNova()
+```php
+Str::isNotNova($request)
+```
+
+## Builder
+
+### Builder::published()
+`BuilderHelper::published` will filter on database columns if something is published.
+```php
+public function scopePublished (Builder $builder)
+{
+	BuilderHelper::published($builder, $valid_from_column, $valid_till_column);
+}
+```
+
+## ReviewHelper
+For the review stars you can call `ReviewHelper::ratingToStars(4.5)`. By default the ReviewHelper will think you are using a max rating of 5, support half star rating and return a string of FontAwesome icons. You can overule this behaviour by;
+
+### Customise
+Create the config file `config/review.php` and specify your needs:
+```php
+return [
+    'max_rating' => 10,
+    'full_star' => '+ ',
+    'half_star' => '* ',
+    'empty_star' => '- ',
+];
+```
+
+Or you can provide the same config array as a second parameter to the `ratingToStars` method like so;
+```php
+ReviewHelper::ratingToStars(4.5, [
+    'max_rating' => 10,
+    'full_star' => '+ ',
+    'half_star' => '* ',
+    'empty_star' => '- ',
+])
+```
+
+## Helper functions
+- percentage(47, App\Post::get()); // 63.829787234043
+
+<EditOnGithub repo_name="packages" edit_url="support/helpers.md"/>

@@ -1,5 +1,5 @@
-# Server
+# Nova
 
 ...
 
-<EditOnGithub repo_name="ecommerce" edit_url="server/README.md"/>
+<EditOnGithub repo_name="packages" edit_url="nova/README.md"/>

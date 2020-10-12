@@ -6,6 +6,12 @@ module.exports = [
             'introduction',
         ],
     }, {
+        title: "Support",
+        collapsable: false,
+        children: prefix('support', [
+            'helpers',
+        ]),
+    }, {
         title: "Nova",
         collapsable: false,
         children: prefix('nova', [
