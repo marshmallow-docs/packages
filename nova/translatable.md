@@ -7,6 +7,7 @@
 # Require the package and its dependencies
 composer require marshmallow/translatable
 
+# Publish the translateble config file.
 php artisan vendor:publish --provider Marshmallow\\Translatable\\ServiceProvider
 
 # Migrate the translations and translatable tables.
@@ -14,14 +15,6 @@ php artisan migrate
 
 # Run the package installer
 php artisan translatable:install
-
-# Create the language resource
-php artisan marshmallow:resource Language Translatable
-php artisan marshmallow:resource Translation Translatable
-
-# Seed your translations table
-php artisan translatable:sync-file-to-database
-php artisan translatable:sync-missing
 ```
 
 ::: warning
@@ -71,6 +64,19 @@ class Page extends Resource
     }
 }
 ```
+## Routes
+We have default routes available to use in your frontend so the user can switch there language. Use the route below to do so.
+```php
+use Marshmallow\Translatable\Models\Language;
+$languages = Language::get();
+
+# In your blade file
+@foreach($languages as $language)
+	<a href="{{ route('set-locale', $language) }}">
+		{{ $language->name }}
+	</a>
+@endforeach
+```
 
 ## Manualy add translations
 Manual translations:
@@ -85,33 +91,36 @@ $page->setTranslation('nl', [
 ## Options
 ### Excluding from translations
 By default we set all columns to translatable except for the columns that are [marked as producted](#marked-as-protected) by us. You have two options to change this behaviour. You can set the translatable columns manualy or you can keep the default behaviour and exclude more columns.
-::: details View examples
+::: details Display examples
 ```php
 # In this example, we have a resource with the columns:
 # id, name, slug, image, created_at
 
 /**
  * The default behaviour
- * Translatable: name, slug and image
+ * Translatable: name, slug and image. Id and created_at are protected by default
  */
 
 /**
  * Set the translatable columns manualy on your model.
  * Translatable: name and slug
  */
-public $translatable = [
-	'name',
-	'slug',
-];
+public function translatableColumns(): array
+{
+    return [
+        'name',
+		'slug',
+    ];
+}
 
 /**
  * Use the default settings but exclude columns
  * Translatable: name and image
  */
-public function ignoreFromTranslations(): array
+public function notTranslateColumns(): array
 {
-	return [
-		'slug'
+    return [
+	    'slug',
 	];
 }
 ```
@@ -120,7 +129,7 @@ public function ignoreFromTranslations(): array
 
 ### Marked as protected
 ```php
-protected $protected_columns = [
+protected $protected_from_translations = [
 	'id',
 	'created_at',
 	'updated_at',
