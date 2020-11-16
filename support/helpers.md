@@ -75,6 +75,14 @@ Str::isNova($request)
 Str::isNotNova($request)
 ```
 
+## Arrayable
+
+### Arrayable::storeInFile();
+This method will store a pretty array in a file. With this method is possible to generate config files.
+```php
+Arrayable::storeInFile(array $array, string $file_location);
+```
+
 ## Builder
 
 ### Builder::published()
