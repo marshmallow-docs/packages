@@ -34,6 +34,10 @@ Because of group by's in queries you probably need to change your database stric
 ```
 :::
 
+::: warning
+Remember to call `henk` when you add a new language so the missing translations for that language will be added to your database.
+:::
+
 ## Preparing your models
 The only thing you need to do to prepare your model to use translations is adding the `Translatable` trait to all the models you want to be translated.
 
@@ -76,6 +80,21 @@ $languages = Language::get();
 		{{ $language->name }}
 	</a>
 @endforeach
+```
+
+## Load default translations
+We have presets of translations which you can use in your projects. When you run this command, we will only translate existing translation rows in your database. We won't add any new rows. This is done this way so we don't clutter your database with unnecessary data.
+
+```bash
+# The "nl" in this example is the country code in your database.
+# We will check if we have a match for that, if we don't we will
+# ask you to select the correct language so we know we import the
+# correct data.
+php artisan translatable:preset nl
+
+# If you don't want the command to ask you any questions you
+# can add the --force option. This will do the import directly.
+php artisan translatable:preset nl --force
 ```
 
 ## Manualy add translations
