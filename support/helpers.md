@@ -56,23 +56,43 @@ Str::getFirstParagraph($string, $number_of_paragraphs = 1, $return_array = false
 Str::getAllButFirstParagraph($string, $number_of_paragraphs_to_skip = 1, $return_array = false)
 ```
 
+## Migrations
+We have a trait available that gives you some extra options when creating migrations. Add the `MigrationHelper` trait to you migration to make use of these options.
+```php
+use Marshmallow\HelperFunctions\Traits\MigrationHelper;
+
+class CreateProductTable extends Migration
+{
+    use MigrationHelper;
+```
+
+### Create a column only if it doesnt exist.
+This method was added because when a database that already has a products table and later will use our `Product` package, the migrations will through error's.
+```php
+$this->createColumnIfDoesntExist(
+    'products', 'deleted_at', function (Blueprint $table) {
+        $table->softDeletes();
+    }
+);
+```
+
 ## URL
 
-### Str::isInternal()
+### URL::isInternal()
 ```php
-Str::isInternal($url)
+URL::isInternal($url)
 ```
-### Str::buildFromArray()
+### URL::buildFromArray()
 ```php
-Str::buildFromArray($array)
+URL::buildFromArray($array)
 ```
-### Str::isNova()
+### URL::isNova()
 ```php
-Str::isNova($request)
+URL::isNova($request)
 ```
-### Str::isNotNova()
+### URL::isNotNova()
 ```php
-Str::isNotNova($request)
+URL::isNotNova($request)
 ```
 
 ## Arrayable
@@ -119,6 +139,8 @@ ReviewHelper::ratingToStars(4.5, [
 ```
 
 ## Helper functions
-- percentage(47, App\Post::get()); // 63.829787234043
+```php
+percentage(47, App\Post::get()); // 63.829787234043
+```
 
 <EditOnGithub repo_name="packages" edit_url="support/helpers.md"/>
