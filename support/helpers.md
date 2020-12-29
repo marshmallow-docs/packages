@@ -82,6 +82,12 @@ $this->createColumnIfDoesntExist(
 ```php
 URL::isInternal($url)
 ```
+
+### URL::isCurrent()
+```php
+URL::isCurrent($url)
+```
+
 ### URL::buildFromArray()
 ```php
 URL::buildFromArray($array)
