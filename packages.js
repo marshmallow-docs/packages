@@ -18,6 +18,12 @@ module.exports = [
             'translatable',
             'live-update',
         ]),
+    }, {
+        title: "SEO",
+        collapsable: false,
+        children: prefix('seo', [
+            'rich-content',
+        ]),
     }
 ]
 
