@@ -35,7 +35,7 @@ Because of group by's in queries you probably need to change your database stric
 :::
 
 ::: warning
-Remember to call `henk` when you add a new language so the missing translations for that language will be added to your database.
+Remember to call `translatable:sync-missing` when you add a new language so the missing translations for that language will be added to your database.
 :::
 
 ## Preparing your models

@@ -11,6 +11,26 @@ composer require marshmallow/helpers
 ## Str
 The Str helper extends the helper from Laravel. So you have all the methods available in the Laravel helper available as well. Check the [Laravel documentation](https://laravel.com/docs/helpers) for all the available methods.
 
+### Str::random()
+We have added on the default `Str::random()` of Laravel. We've added a second parameter which is an array of characters that should be ignored. We also have build in a couple of presets like `lowercase` which will make sure the random string won't contain any lowercase characters.
+```php
+Str::random($limit = 16, $ignore = [
+	/**
+	 * Custom items
+	 */
+  	'A','B', 'C', 'D',
+
+  	/**
+  	 * Presets
+  	 */
+	'lowercase', 	// Will ignore all lowercase characters.
+	'uppercase',	// Will ignore all uppercase characters.
+	'letters',		// Will ignore all letters.
+	'numbers',		// Will ignore all numbers.
+	'similar',		// Will ignore all numbers and letters that have been marked as similar.
+]);
+```
+
 ### Str::cleanPhoneNumber()
 ```php
 Str::cleanPhoneNumber()
