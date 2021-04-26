@@ -217,7 +217,7 @@ $grouper = Collection::createGrouper(Blog::get(), $structure_array = [
 ]);
 ```
 
-As you can see in the example, the `structure_array` has a name as the key. This is done so when you are looping through your groups, you are able the test which group you are currently looping.
+As you can see in the example, the `structure_array` has a name as the key. This is done so when you are looping through your groups, you are able the test which group you are currently looping..
 
 ```php
 foreach ($grouper as $group) {
