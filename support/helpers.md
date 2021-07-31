@@ -14,6 +14,20 @@ composer require marshmallow/helpers
 
 The Str helper extends the helper from Laravel. So you have all the methods available in the Laravel helper available as well. Check the [Laravel documentation](https://laravel.com/docs/helpers) for all the available methods.
 
+### Str::join()
+
+This method is super handy for concatenating strings separated by a comma, but use another value for the last item. Checkout the example below.
+
+```php
+Str::join([
+  'Marshmallow',
+  'Stef van Esch',
+  'Mr Mallow'
+]);
+
+// Marshmallow, Stef van Esch and Mr Mallow
+```
+
 ### Str::random()
 
 We have added on the default `Str::random()` of Laravel. We've added a second parameter which is an array of characters that should be ignored. We also have build in a couple of presets like `lowercase` which will make sure the random string won't contain any lowercase characters.
