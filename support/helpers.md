@@ -10,6 +10,54 @@ We have build a package with some helpers that are usefull in almost every proje
 composer require marshmallow/helpers
 ```
 
+## CSV
+
+This helper will make generating .csv files extremly ease. Please check the examples below. You can use the `store` method to store it in a location of your choosing. You can use the `download` method if you just want to download the file. If you wish to store and download the generated .csv file you can use the `storeAndDownload` method.
+
+### Simple usage example
+
+```php
+$headers = ['Column 1', 'Column 2', 'Column 3'];
+$data = [
+	[1, 2, 3],
+	[4, 5, 6],
+];
+
+return CSV::headers($headers)
+	->data($data)
+	->setFilename('generated-csv-1234')
+	->storeAndDownload();
+```
+
+### Use a collection as data attribute
+
+You can use a collection as your data attribute. By default it will map all the data in the collection sequence. If you wish to edit the collection data, you can add a callback method to the data method. Please note that this will give you every row as an `array` value.
+
+```php
+use Marshmallow\HelperFunctions\Facades\CSV;
+
+CSV::headers($headers)
+        ->data($data, function (array $row) {
+            return [
+                $row['name'],
+                $row['slug'],
+                $row['created_at'],
+            ];
+        })
+        ->storeAndDownload();
+```
+
+### Store and download calls
+
+The following methods are available for storing and downloading the generated csv file.
+
+```php
+$csv->download();
+$csv->store();
+$csv->storeAndDownload();
+$csv->stream();
+```
+
 ## Str
 
 The Str helper extends the helper from Laravel. So you have all the methods available in the Laravel helper available as well. Check the [Laravel documentation](https://laravel.com/docs/helpers) for all the available methods.
